@@ -36,15 +36,6 @@ public:
     HiInteger(int x);
     int value() { return _value; } // 通过 value 方法 来获取实例私有变量的值
 
-    void print();
-    HiObject* add(HiObject* x);
-
-    HiObject* greater  (HiObject* x);
-    HiObject* less     (HiObject* x);
-    HiObject* equal    (HiObject* x);
-    HiObject* not_equal(HiObject* x);
-    HiObject* ge       (HiObject* x);
-    HiObject* le       (HiObject* x);
 };
 
 #endif
