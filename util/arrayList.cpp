@@ -1,4 +1,5 @@
 #include "util/arrayList.hpp"
+#include "runtime/interpreter.hpp"
 #include <stdio.h>
 
 template <typename T>
@@ -81,3 +82,5 @@ template class ArrayList<HiObject *>;
 class HiString;
 template class ArrayList<HiString *>;
 
+class Block;
+template class ArrayList<Block*>;
