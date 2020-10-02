@@ -14,6 +14,7 @@ SET(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -rdynamic")
 ADD_EXECUTABLE(pyvm01 main.cpp
     object/hiInteger.cpp
     object/hiString.cpp
+    object/hiObject.cpp
     util/arrayList.cpp
     util/map.cpp
     runtime/interpreter.cpp
