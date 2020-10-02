@@ -15,7 +15,9 @@ ADD_EXECUTABLE(pyvm01 main.cpp
     object/hiInteger.cpp
     object/hiString.cpp
     util/arrayList.cpp
+    util/map.cpp
     runtime/interpreter.cpp
+    runtime/universe.cpp
     code/binaryFileParser.cpp
     code/codeObject.cpp)
 

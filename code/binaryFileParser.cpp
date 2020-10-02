@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include "code/binaryFileParser.hpp"
+#include "runtime/universe.hpp"
 
 
 
@@ -166,7 +167,7 @@ ArrayList<HiObject*>* BinaryFileParser::get_tuple() {
             list->add(new HiInteger(file_stream->read_int()));
             break;
         case 'N':
-            list->add(NULL);
+            list->add(Universe::HiNone);
             break;
         case 't':
             str = get_string();

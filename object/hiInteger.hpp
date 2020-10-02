@@ -8,7 +8,7 @@ private:
 
 public:
     HiInteger(int x);
-    int value() { return _value; }
+    int value() { return _value; } // 通过 value 方法 来获取实例私有变量的值
 
     virtual void print();
     virtual HiObject* add(HiObject* x);

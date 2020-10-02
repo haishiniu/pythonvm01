@@ -14,6 +14,8 @@ class HiString : public HiObject {
         const char* value() {return _value ;}
         int length()        {return _length ;}
 
+        virtual HiObject* equal(HiObject* x);
+
 };
 
 #endif

@@ -1,6 +1,7 @@
 #include "util/bufferedInputStream.hpp"
 #include "code/binaryFileParser.hpp"
 #include "runtime/interpreter.hpp"
+#include "runtime/universe.hpp"
 
 
 int main(int argc, char** argv) {
@@ -13,6 +14,7 @@ int main(int argc, char** argv) {
     // printf("magic number is 0x%x\n", stream.read_int());
     BinaryFileParser parser(&stream);
     CodeObject* main_code = parser.parse();
+    Universe::genesis(); // __init__
     Interpreter interpreter;
     interpreter.run(main_code);
     return 0;

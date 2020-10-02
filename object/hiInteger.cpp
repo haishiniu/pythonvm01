@@ -1,6 +1,7 @@
 #include "object/hiInteger.hpp"
+#include "runtime/universe.hpp"
 #include <stdio.h>
-#include <stdio.h>
+
 
 // 初始化 HiInteger
 HiInteger::HiInteger(int x) {
@@ -12,48 +13,48 @@ void HiInteger::print() {
 }
 
 HiObject* HiInteger::add(HiObject* x) {
-    // ((HiInteger*)x) ？ 类型强制转化？
+    // ((HiInteger*)x)  类型强制转化
     return new HiInteger(_value + ((HiInteger*)x)->_value);
 }
 
 HiObject* HiInteger::greater(HiObject* x) {
     if (_value > ((HiInteger*)x)->_value)
-        return new HiInteger(1);
+        return Universe::HiTrue;
     else
-        return new HiInteger(0);
+        return Universe::HiFalse;
 }
 
 HiObject* HiInteger::less(HiObject* x) {
     if (_value < ((HiInteger*)x)->_value)
-        return new HiInteger(1);
+        return Universe::HiTrue;
     else
-        return new HiInteger(0);
+        return Universe::HiFalse;
 }
 
 HiObject* HiInteger::le(HiObject* x) {
     if (_value <= ((HiInteger*)x)->_value)
-        return new HiInteger(1);
+        return Universe::HiTrue;
     else
-        return new HiInteger(0);
+        return Universe::HiFalse;
 }
 
 HiObject* HiInteger::ge(HiObject* x) {
     if (_value >= ((HiInteger*)x)->_value)
-        return new HiInteger(1);
+        return Universe::HiTrue;
     else
-        return new HiInteger(0);
+        return Universe::HiFalse;
 }
 
 HiObject* HiInteger::equal(HiObject* x) {
     if (_value == ((HiInteger*)x)->_value)
-        return new HiInteger(1);
+        return Universe::HiTrue;
     else
-        return new HiInteger(0);
+        return Universe::HiFalse;
 }
 
 HiObject* HiInteger::not_equal(HiObject* x) {
     if (_value != ((HiInteger*)x)->_value)
-        return new HiInteger(1);
+        return Universe::HiTrue;
     else
-        return new HiInteger(0);
+        return Universe::HiFalse;
 }
