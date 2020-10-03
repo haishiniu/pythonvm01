@@ -24,6 +24,7 @@ private:
     CodeObject* _func_code;
     HiString*   _func_name;  // function name
     Map<HiObject*, HiObject*>* _globals;
+    ObjList     _defaults;
 
     unsigned int _flags;
 
@@ -33,6 +34,8 @@ public:
         _func_code = NULL;
         _func_name = NULL;
         _flags     = 0;
+        _globals = NULL;
+        _defaults = NULL; 
 
         set_klass(klass);
     }
@@ -42,6 +45,11 @@ public:
 
     Map<HiObject*, HiObject*>* globals() { return _globals; }
     void set_globals(Map<HiObject*, HiObject*>* x) { _globals = x; }
+
+    void set_default(ObjList defaults);
+    ObjList defaults()       { return _defaults; }
+
+
 };
 
 #endif
