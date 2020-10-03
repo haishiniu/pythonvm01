@@ -80,3 +80,7 @@ HiObject* HiObject::contains(HiObject* x) {
 void HiObject::del_subscr(HiObject* x) {
     klass()->del_subscr(this, x);
 }
+
+HiObject* HiObject::iter() {
+    return klass()->iter(this);
+}

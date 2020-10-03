@@ -6,6 +6,7 @@
 #include "util/arrayList.hpp"
 
 class FunctionObject;
+class HiList;
 
 class Block {
 public:
@@ -40,7 +41,7 @@ public:
     FrameObject(FunctionObject* func, ObjList args);
     ~FrameObject() {};
 
-    ArrayList<HiObject*>* _stack;  // ArrayList *  是的 _stack 的类型 其中存储的是 HiObject* 类型的数据
+    HiList* _stack;  // ArrayList *  是的 _stack 的类型 其中存储的是 HiObject* 类型的数据
     ArrayList<Block*>*    _loop_stack;  // 记录循环中 SETUP_LOOP 参数
 
     ArrayList<HiObject*>* _consts;
@@ -60,7 +61,7 @@ public:
     void set_pc(int x)              { _pc = x; }
     int  get_pc()                   { return _pc; }
 
-    ArrayList<HiObject*>* stack()                 { return _stack; }
+    HiList* stack()                 { return _stack; }
     ArrayList<Block*>* loop_stack()               { return _loop_stack; }
     ArrayList<HiObject*>* consts()                { return _consts; }
     ArrayList<HiObject*>* names()                 { return _names; }

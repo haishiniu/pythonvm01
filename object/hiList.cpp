@@ -167,7 +167,8 @@ HiObject* list_remove(ObjList args) {
 
 
 HiObject* ListKlass::iter(HiObject* x) {
-    return Universe::HiNone;
+    assert(x && x->klass() == this);
+    return new ListIterator((HiList*)x);
 }
 
 HiList::HiList() {
@@ -214,6 +215,29 @@ ListIteratorKlass* ListIteratorKlass::get_instance() {
     return instance;
 }
 
-HiObject* ListIteratorKlass::next(HiObject* x) {
-    return NULL;
+ListIteratorKlass::ListIteratorKlass() {
+    HiDict* klass_dict = new HiDict();
+    klass_dict->put(new HiString("next"), 
+            new FunctionObject(listiterator_next));
+    set_klass_dict(klass_dict);
+}
+
+ListIterator::ListIterator(HiList* list) {
+    _owner = list;
+    _iter_cnt = 0;
+    set_klass(ListIteratorKlass::get_instance());
+}
+
+HiObject* listiterator_next(ObjList args) {
+    ListIterator* iter = (ListIterator*)(args->get(0));
+
+    HiList* alist = iter->owner();
+    int iter_cnt = iter->iter_cnt();
+    if (iter_cnt < alist->inner_list()->size()) {
+        HiObject* obj = alist->get(iter_cnt);
+        iter->inc_cnt();
+        return obj;
+    }
+    else // TODO : we need Traceback here to mark iteration end
+        return NULL;
 }
