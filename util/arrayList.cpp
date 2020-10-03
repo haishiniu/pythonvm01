@@ -21,7 +21,7 @@ template <typename T>
 void ArrayList<T>::insert(int index, T t) {
     add(NULL);
 
-    for (int i = _size; i > index; i --) {
+    for (int i = _size - 1; i > index; i --) {
         _array[i] = _array[i - 1];
     };
     _array[index] = t;

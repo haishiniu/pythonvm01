@@ -70,7 +70,7 @@ void Interpreter::run(CodeObject* codes) {
     Block* b;
     FunctionObject* fo;
     ArrayList<HiObject*>* args = NULL;
-    HiObject* v, * w;  // 存储对象及属性
+    HiObject* v, * w, *u;  // 存储对象及属性
 
 
     while (_frame->has_more_codes()) {
@@ -155,6 +155,13 @@ void Interpreter::run(CodeObject* codes) {
             case ByteCode::STORE_GLOBAL:
                 v = _frame->names()->get(op_arg);
                 _frame->globals()->put(v, POP());
+                break;
+
+            case ByteCode::STORE_SUBSCR:
+                u = POP();
+                v = POP();
+                w = POP();
+                v->store_subscr(u, w);
                 break;
 
             case ByteCode::BINARY_SUBSCR:
