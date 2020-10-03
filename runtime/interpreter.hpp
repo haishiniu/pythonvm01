@@ -12,6 +12,7 @@ public:
     Interpreter(); // 初始化解释器 
 
     void run(CodeObject* codes);  // 进行解释 执行
+    void build_frame(HiObject* callable);
 };
 
 #endif

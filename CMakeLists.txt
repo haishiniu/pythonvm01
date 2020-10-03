@@ -20,6 +20,7 @@ ADD_EXECUTABLE(pyvm01 main.cpp
     runtime/frameObject.cpp
     runtime/interpreter.cpp
     runtime/universe.cpp
+    runtime/functionObject.cpp
     code/binaryFileParser.cpp
     code/codeObject.cpp)
 

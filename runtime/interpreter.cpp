@@ -1,6 +1,7 @@
 #include "runtime/interpreter.hpp"
 #include "runtime/universe.hpp"
 #include "runtime/frameObject.hpp"
+#include "runtime/functionObject.hpp"
 #include "util/arrayList.hpp"
 #include "util/map.hpp"
 #include "object/hiString.hpp"
@@ -14,6 +15,12 @@
 
 Interpreter::Interpreter() {
     // 初始化 解释器
+}
+
+void Interpreter::build_frame(HiObject* callable) {
+    FrameObject* frame = new FrameObject((FunctionObject*) callable);
+    frame->set_sender(_frame);
+    _frame = frame;
 }
 
 void Interpreter::run(CodeObject* codes) {
@@ -31,6 +38,7 @@ void Interpreter::run(CodeObject* codes) {
         }
 
         Block* b;
+        FunctionObject* fo;
         HiObject* v, * w, * u, * attr; // 存储对象及属性
 
         switch (op_code) {
@@ -67,6 +75,16 @@ void Interpreter::run(CodeObject* codes) {
                 v = POP();
                 w = POP();
                 PUSH(w->add(v));
+                break;
+
+             case ByteCode::MAKE_FUNCTION:
+                v = POP();
+                fo = new FunctionObject(v);
+                PUSH(fo);
+                break;
+
+            case ByteCode::CALL_FUNCTION:
+                build_frame(POP());
                 break;
 
             case ByteCode::RETURN_VALUE:
