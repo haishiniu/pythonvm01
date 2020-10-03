@@ -38,7 +38,7 @@ class FrameObject {
 public:
     FrameObject(CodeObject* codes);
     FrameObject(FunctionObject* func);
-    ~FrameObject();
+    ~FrameObject() {};
 
     ArrayList<HiObject*>* _stack;  // ArrayList *  是的 _stack 的类型 其中存储的是 HiObject* 类型的数据
     ArrayList<Block*>*    _loop_stack;  // 记录循环中 SETUP_LOOP 参数
