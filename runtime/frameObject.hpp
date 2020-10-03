@@ -37,7 +37,7 @@ public:
 class FrameObject {
 public:
     FrameObject(CodeObject* codes);
-    FrameObject(FunctionObject* func);
+    FrameObject(FunctionObject* func, ObjList args);
     ~FrameObject() {};
 
     ArrayList<HiObject*>* _stack;  // ArrayList *  是的 _stack 的类型 其中存储的是 HiObject* 类型的数据
@@ -48,6 +48,7 @@ public:
 
     Map<HiObject*, HiObject*>* _locals;
     Map<HiObject*, HiObject*>* _globals;
+    ObjList                    _fast_locals;
 
     CodeObject*           _codes;
     FrameObject*          _sender;  // 记录调用者的栈帧--链表存储
@@ -65,6 +66,7 @@ public:
     ArrayList<HiObject*>* names()                 { return _names; }
     Map<HiObject*, HiObject*>* locals()           { return _locals; }
     Map<HiObject*, HiObject*>* globals()          { return _globals; }
+    ObjList                    fast_locals()      { return _fast_locals; }
 
     bool has_more_codes();
     unsigned char get_op_code();
