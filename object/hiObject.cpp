@@ -64,3 +64,7 @@ HiObject* HiObject::getattr(HiObject* x) {
     }
     return result;
 }
+
+HiObject* HiObject::subscr(HiObject* x) {
+    return klass()->subscr(this, x);
+}
