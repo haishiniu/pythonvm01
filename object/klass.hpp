@@ -47,7 +47,7 @@ public:
     virtual HiObject* contains (HiObject* x, HiObject* y) { return 0; }
 
     virtual HiObject* call(ArrayList<HiObject*>* args) { return 0; }
-
+    virtual void del_subscr    (HiObject* x, HiObject* y) { return; }
 };
 
 #endif

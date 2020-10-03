@@ -19,8 +19,10 @@ public:
     virtual void print(HiObject* obj);
     virtual HiObject* subscr (HiObject* x, HiObject* y);
     virtual void store_subscr (HiObject* x, HiObject* y, HiObject* z);
+    
     virtual HiObject* iter(HiObject* x);
     virtual HiObject* contains (HiObject* x, HiObject* y);
+    virtual void del_subscr (HiObject* x, HiObject* y);
 };
 
 
@@ -56,5 +58,8 @@ public:
 };
 
 HiObject* list_append(ObjList args);
+HiObject* list_pop(ObjList args);
+HiObject* list_remove(ObjList args);
+
 
 #endif

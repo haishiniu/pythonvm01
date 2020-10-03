@@ -21,6 +21,7 @@ public:
         int  size();
         int  length();
         T    pop();
+        void delete_index(int index);
 };
 
 
