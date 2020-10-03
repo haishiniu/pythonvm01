@@ -26,9 +26,10 @@ FunctionObject::FunctionObject(HiObject* code_object) {
 }
 
 void FunctionKlass::print(HiObject* obj) {
-    printf("native function : ");
+    printf("<function : ");
     FunctionObject* fo = static_cast<FunctionObject*>(obj);
 
     assert(fo && fo->klass() == (Klass*) this);
     fo->func_name()->print();
+    printf(">");
 }
