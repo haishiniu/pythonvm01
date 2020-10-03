@@ -46,6 +46,16 @@ void StringKlass::print(HiObject* obj) {
     }
 }
 
+HiObject* StringKlass::subscr(HiObject* x, HiObject* y) {
+    assert(x && x->klass() == (Klass*) this);
+    assert(y && y->klass() == (Klass*) IntegerKlass::get_instance());
+
+    HiString * sx = (HiString*)x;
+    HiInteger* iy = (HiInteger*)y;
+    
+    return new HiString(&(sx->value()[iy->value()]), 1);
+}
+
 HiString::HiString(const char* x) {
     _length = strlen(x);
     _value = new char[_length];

@@ -68,3 +68,7 @@ HiObject* HiObject::getattr(HiObject* x) {
 HiObject* HiObject::subscr(HiObject* x) {
     return klass()->subscr(this, x);
 }
+
+HiObject* HiObject::contains(HiObject* x) {
+    return klass()->contains(this, x);
+}
