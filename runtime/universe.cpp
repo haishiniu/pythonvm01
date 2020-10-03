@@ -6,8 +6,8 @@
 
 
 // __init__ 
-HiInteger* Universe::HiTrue   = NULL;
-HiInteger* Universe::HiFalse  = NULL;
+HiObject* Universe::HiTrue   = NULL;
+HiObject* Universe::HiFalse  = NULL;
 HiObject*  Universe::HiNone   = NULL;
 
 
@@ -18,6 +18,7 @@ void Universe::genesis() {
 
     HiDict* klass_dict = new HiDict();
     StringKlass::get_instance()->set_klass_dict(klass_dict);
+    StringKlass::get_instance()->set_name(new HiString("str"));
     klass_dict->put(new HiString("upper"), new FunctionObject(string_upper));
 }
 

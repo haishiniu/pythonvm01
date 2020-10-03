@@ -24,7 +24,13 @@ ListKlass::ListKlass() {
         new FunctionObject(list_pop));
     klass_dict->put(new HiString("remove"),   
         new FunctionObject(list_remove));
+    klass_dict->put(new HiString("reverse"), 
+        new FunctionObject(list_reverse));
+    klass_dict->put(new HiString("sort"), 
+        new FunctionObject(list_sort));
+
     set_klass_dict(klass_dict);
+    set_name(new HiString("list"));
 }
 
 void ListKlass::print(HiObject* x) {
@@ -87,6 +93,24 @@ HiObject* ListKlass::contains(HiObject* x, HiObject* y) {
     return Universe::HiFalse;
 }
 
+HiObject* list_sort(ObjList args) {
+    HiList* list = (HiList*)(args->get(0));
+    assert(list && list->klass() == ListKlass::get_instance());
+
+    // bubble sort
+    for (int i = 0; i < list->size(); i++) {
+        for (int j = list->size() - 1; j > i; j--) {
+            if (list->get(j)->less(list->get(j-1)) == Universe::HiTrue) {
+                HiObject* t = list->get(j);
+                list->set(j, list->get(j-1));
+                list->set(j-1, t);
+            }
+        }
+    }
+
+    return Universe::HiNone;
+}
+
 HiObject* list_pop(ObjList args) {
     HiList* list = (HiList*)(args->get(0));
     assert(list && list->klass() == ListKlass::get_instance());
@@ -125,6 +149,23 @@ HiList::HiList(ObjList ol) {
 
 HiObject* list_append(ObjList args) {
     ((HiList*)(args->get(0)))->append(args->get(1));
+    return Universe::HiNone;
+}
+
+HiObject* list_reverse(ObjList args) {
+    HiList* list = (HiList*)(args->get(0));
+
+    int i = 0;
+    int j = list->size() - 1;
+    while (i < j) {
+        HiObject* t = list->get(i);
+        list->set(i, list->get(j));
+        list->set(j, t);
+
+        i++;
+        j--;
+    }
+
     return Universe::HiNone;
 }
 
