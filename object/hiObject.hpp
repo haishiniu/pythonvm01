@@ -25,6 +25,8 @@ class HiObject {
         HiObject* not_equal(HiObject* x);
         HiObject* ge       (HiObject* x);
         HiObject* le       (HiObject* x);
+
+        HiObject* getattr(HiObject* x);
 };
 
 #endif
