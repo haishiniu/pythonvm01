@@ -56,6 +56,11 @@ void Interpreter::run(CodeObject* codes) {
         HiObject* v, * w; // 存储对象及属性
 
         switch (op_code) {
+                
+            case ByteCode::POP_TOP:
+                POP();
+                break;
+
             case ByteCode::LOAD_CONST:
                 PUSH(_frame->consts()->get(op_arg));
                 break;
@@ -68,12 +73,29 @@ void Interpreter::run(CodeObject* codes) {
                     break;
                 }
 
+                w = _frame->globals()->get(v);
+                if (w != Universe::HiNone) {
+                    PUSH(w);
+                    break;
+                }
+
                 PUSH(Universe::HiNone);
+                break;
+
+            case ByteCode::LOAD_GLOBAL:
+                v = _frame->names()->get(op_arg);
+                w = _frame->globals()->get(v);
+                PUSH(w);
                 break;
 
             case ByteCode::STORE_NAME:
                 v = _frame->names()->get(op_arg);
                 _frame->locals()->put(v, POP());
+                break;
+
+            case ByteCode::STORE_GLOBAL:
+                v = _frame->names()->get(op_arg);
+                _frame->globals()->put(v, POP());
                 break;
 
             case ByteCode::PRINT_ITEM:
@@ -94,6 +116,7 @@ void Interpreter::run(CodeObject* codes) {
              case ByteCode::MAKE_FUNCTION:
                 v = POP();
                 fo = new FunctionObject(v);
+                fo->set_globals(_frame->globals());
                 PUSH(fo);
                 break;
 
