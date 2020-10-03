@@ -23,6 +23,7 @@ ADD_EXECUTABLE(pyvm01 main.cpp
     runtime/interpreter.cpp
     runtime/universe.cpp
     runtime/functionObject.cpp
+    runtime/stringTable.cpp
     code/binaryFileParser.cpp
     code/codeObject.cpp)
 
