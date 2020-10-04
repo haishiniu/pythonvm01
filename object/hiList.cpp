@@ -34,6 +34,7 @@ ListKlass::ListKlass() {
     klass_dict->put(new HiString("extend"), 
         new FunctionObject(list_extend));
 
+    (new HiTypeObject())->set_own_klass(this);
     set_klass_dict(klass_dict);
     set_name(new HiString("list"));
 }
