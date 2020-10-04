@@ -24,7 +24,7 @@ public:
     ArrayList<HiObject*>*  _free_vars;
     ArrayList<HiObject*>*  _cell_vars;
 
-    HiString* _co_name;
+    HiString* _co_name;  // function_name
     HiString* _file_name;
 
     int _lineno;

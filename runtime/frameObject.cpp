@@ -5,7 +5,7 @@
 
 // this constructor is used for module only.
 FrameObject::FrameObject(CodeObject* codes) {
-    _consts  = codes->_consts;
+    _consts  = codes->_consts;  // 使用的是 CodeObject 对象的方法
     _names   = codes->_names;
     
     _locals  = new Map<HiObject*, HiObject*>();
@@ -34,11 +34,11 @@ FrameObject::FrameObject (FunctionObject* func, ObjList args) {
         int argcnt  = _codes->_argcount;
 
         while (dft_cnt--) {
-            _fast_locals->set(--argcnt, func->_defaults->get(dft_cnt));
+            _fast_locals->set(--argcnt, func->_defaults->get(dft_cnt));  // 默认参数是在function最后 --argcnt
         }
     }
 
-    if (args) {
+    if (args) {  // actual enter args 
 
         for (int i = 0; i < args->length(); i++) {
             _fast_locals->set(i, args->get(i));

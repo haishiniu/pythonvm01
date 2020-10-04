@@ -32,14 +32,14 @@ FunctionObject::FunctionObject(NativeFuncPointer nfp) {
     _func_name = NULL;
     _flags     = 0;
     _globals   = NULL;
-    _native_func = nfp;
+    _native_func = nfp;  // native function 
 
     set_klass(NativeFunctionKlass::get_instance());
 }
 
 void FunctionKlass::print(HiObject* obj) {
     printf("<function : ");
-    FunctionObject* fo = static_cast<FunctionObject*>(obj);
+    FunctionObject* fo = static_cast<FunctionObject*>(obj);  /* 下行转换 */
 
     assert(fo && fo->klass() == (Klass*) this);
     fo->func_name()->print();

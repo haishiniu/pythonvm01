@@ -57,7 +57,7 @@ void Interpreter::build_frame(HiObject* callable, ObjList args) {
     }
     else if (callable->klass() == FunctionKlass::get_instance()) {
         FrameObject* frame = new FrameObject((FunctionObject*) callable, args);
-        frame->set_sender(_frame);
+        frame->set_sender(_frame);  // { _sender = x; }   FrameObject*  _sender;
         _frame = frame;
     }
 }

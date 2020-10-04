@@ -37,7 +37,7 @@ private:
 public:
     FunctionObject(HiObject* code_object);
 
-    FunctionObject(NativeFuncPointer nfp);
+    FunctionObject(NativeFuncPointer nfp);  // native function
 
     FunctionObject(Klass* klass) {
         _func_code = NULL;
