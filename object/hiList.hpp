@@ -27,6 +27,8 @@ public:
     virtual HiObject* iter(HiObject* x);
     virtual HiObject* contains (HiObject* x, HiObject* y);
     virtual void del_subscr (HiObject* x, HiObject* y);
+
+    virtual HiObject* allocate_instance(ArrayList<HiObject*>* args);
 };
 
 

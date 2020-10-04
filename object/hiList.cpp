@@ -299,3 +299,10 @@ HiObject* listiterator_next(ObjList args) {
     else // TODO : we need Traceback here to mark iteration end
         return NULL;
 }
+
+HiObject* ListKlass::allocate_instance(ArrayList<HiObject*>* args) {
+    if (!args || args->length() == 0)
+        return new HiList();
+    else
+        return NULL;
+}

@@ -56,6 +56,8 @@ public:
     virtual void del_subscr    (HiObject* x, HiObject* y) { return; }
 
     virtual HiObject* iter(HiObject* x) { return 0; }
+
+    virtual HiObject* allocate_instance(ArrayList<HiObject*>* args) { return 0; }
 };
 
 #endif

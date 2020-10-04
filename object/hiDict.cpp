@@ -33,7 +33,9 @@ void DictKlass::initialize() {
             new FunctionObject(dict_items));
 
     set_klass_dict(klass_dict);
+    (new HiTypeObject())->set_own_klass(this);
     set_super(ObjectKlass::get_instance());
+
 }
 
 void DictKlass::print(HiObject* obj) {
@@ -58,9 +60,6 @@ void DictKlass::print(HiObject* obj) {
     printf("}");
 }
 
-size_t DictKlass::size() {
-    return sizeof(HiDict);
-}
 
 HiObject* DictKlass::getattr(HiObject* obj, HiString* name) {
     assert(obj->klass() == (Klass*) this);
@@ -210,3 +209,9 @@ HiObject* dictiterator_next(ObjList args) {
         return NULL;
 }
 
+HiObject* DictKlass::allocate_instance(ArrayList<HiObject*>* args) {
+    if (!args || args->length() == 0)
+        return new HiDict();
+    else
+        return NULL;
+}

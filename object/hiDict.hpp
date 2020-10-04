@@ -22,7 +22,7 @@ public:
     virtual void store_subscr(HiObject* x, HiObject* y, HiObject* z);
     virtual void del_subscr (HiObject* x, HiObject* y);
 
-    virtual size_t size();
+    virtual HiObject* allocate_instance(ArrayList<HiObject*>* args);
 };
 
 // class DictIteratorKlass : public Klass {

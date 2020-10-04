@@ -47,6 +47,8 @@ Interpreter::Interpreter() {
     _builtins->put(new HiString("object"),   ObjectKlass::get_instance()->type_object());
     _builtins->put(new HiString("str"),      StringKlass::get_instance()->type_object());
     _builtins->put(new HiString("list"),     ListKlass::get_instance()->type_object());
+
+    _builtins->put(new HiString("dict"),     DictKlass::get_instance()->type_object());
 }
 
 void Interpreter::build_frame(HiObject* callable, ObjList args) {
@@ -67,6 +69,11 @@ void Interpreter::build_frame(HiObject* callable, ObjList args) {
         FrameObject* frame = new FrameObject((FunctionObject*) callable, args);
         frame->set_sender(_frame);  // { _sender = x; }   FrameObject*  _sender;
         _frame = frame;
+    }
+    else if (callable->klass() == TypeKlass::get_instance()) {
+        HiObject* inst = ((HiTypeObject*)callable)->own_klass()->
+            allocate_instance(args); 
+        PUSH(inst);
     }
 }
 
