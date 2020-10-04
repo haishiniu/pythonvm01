@@ -3,6 +3,7 @@
 #include "object/hiInteger.hpp"
 #include "object/hiObject.hpp"
 #include "object/hiString.hpp"
+#include "object/hiDict.hpp"
 
 
 // __init__ 

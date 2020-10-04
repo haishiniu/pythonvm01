@@ -2,6 +2,8 @@
 #include "object/hiInteger.hpp"
 #include "runtime/universe.hpp"
 #include "runtime/functionObject.hpp"
+#include "object/hiDict.hpp"
+
 
 // Singleton case
 FunctionKlass* FunctionKlass::instance = NULL;

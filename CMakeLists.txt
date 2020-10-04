@@ -17,6 +17,7 @@ ADD_EXECUTABLE(pyvm01 main.cpp
     object/hiObject.cpp
     object/hiList.cpp
     object/klass.cpp
+    object/hiDict.cpp
     util/arrayList.cpp
     util/map.cpp
     runtime/frameObject.cpp

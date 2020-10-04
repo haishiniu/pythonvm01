@@ -47,8 +47,8 @@ public:
     ArrayList<HiObject*>* _consts;
     ArrayList<HiObject*>* _names;
 
-    Map<HiObject*, HiObject*>* _locals;
-    Map<HiObject*, HiObject*>* _globals;
+    HiDict* _locals;
+    HiDict* _globals;
     ObjList                    _fast_locals;
 
     CodeObject*           _codes;
@@ -65,9 +65,9 @@ public:
     ArrayList<Block*>* loop_stack()               { return _loop_stack; }
     ArrayList<HiObject*>* consts()                { return _consts; }
     ArrayList<HiObject*>* names()                 { return _names; }
-    Map<HiObject*, HiObject*>* locals()           { return _locals; }
-    Map<HiObject*, HiObject*>* globals()          { return _globals; }
-    ObjList                    fast_locals()      { return _fast_locals; }
+    HiDict* locals()                              { return _locals; }
+    HiDict* globals()                             { return _globals; }
+    ObjList fast_locals()                         { return _fast_locals; }
 
     bool has_more_codes();
     unsigned char get_op_code();
