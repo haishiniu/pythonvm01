@@ -37,6 +37,7 @@ ListKlass::ListKlass() {
     (new HiTypeObject())->set_own_klass(this);
     set_klass_dict(klass_dict);
     set_name(new HiString("list"));
+    set_super(ObjectKlass::get_instance());
 }
 
 HiObject* ListKlass::add(HiObject* x, HiObject* y) {
