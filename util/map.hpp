@@ -31,6 +31,7 @@ public:
     void put(K k, V v);
     V    get(K k);
     K    get_key(int index);
+     bool has_key(K k);
     V    remove(K k);
     int  index(K k);
     MapEntry<K, V>* entries() { return _entries; }

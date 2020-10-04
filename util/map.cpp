@@ -37,6 +37,14 @@ V Map<K, V>::get(K k) {
         return _entries[i]._v;
 }
 
+
+template <typename K, typename V>
+bool Map<K, V>::has_key(K k) {
+    int i = index(k);
+    return i >= 0;
+}
+
+
 template <typename K, typename V>
 int Map<K, V>::index(K k) {
     for (int i = 0; i < _size; i++) {

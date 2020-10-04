@@ -17,6 +17,8 @@ void Universe::genesis() {
     HiFalse      = new HiInteger(0);
     HiNone       = new HiObject();
 
+    DictKlass::get_instance()->initialize();
+
     HiDict* klass_dict = new HiDict();  // because of --> typedef Map<HiObject*, HiObject*> HiDict;
     StringKlass::get_instance()->set_klass_dict(klass_dict);
     StringKlass::get_instance()->set_name(new HiString("str"));
