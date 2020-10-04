@@ -397,6 +397,13 @@ void Interpreter::run(CodeObject* codes) {
                 }
                 break;
 
+            case ByteCode::UNPACK_SEQUENCE:
+                v = POP();
+
+                while (op_arg--) {
+                    PUSH(v->subscr(new HiInteger(op_arg)));
+                }
+                break;
 
             default:
                 printf("Error: Unrecognized byte code %d\n", op_code);
