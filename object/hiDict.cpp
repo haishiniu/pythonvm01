@@ -33,9 +33,10 @@ void DictKlass::initialize() {
             new FunctionObject(dict_items));
 
     set_klass_dict(klass_dict);
+    set_name(new HiString("dict"));
     // __init__
     (new HiTypeObject())->set_own_klass(this);  // as universe.cpp 
-    set_super(ObjectKlass::get_instance());  // DictKlass Inherit ObjectKlass
+    add_super(ObjectKlass::get_instance());;  // DictKlass Inherit ObjectKlass
 
 }
 

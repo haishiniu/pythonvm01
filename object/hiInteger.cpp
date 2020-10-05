@@ -9,10 +9,14 @@ IntegerKlass* IntegerKlass::instance = NULL;
 
 // 初始化 IntegerKlass
 IntegerKlass::IntegerKlass() {
+
+}
+
+void IntegerKlass::initialize() {
     set_klass_dict(new HiDict());
     set_name(new HiString("int"));
     (new HiTypeObject())->set_own_klass(this);
-    set_super(ObjectKlass::get_instance());
+    add_super(ObjectKlass::get_instance());
 }
 
 
