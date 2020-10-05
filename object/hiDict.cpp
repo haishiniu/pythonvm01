@@ -33,8 +33,9 @@ void DictKlass::initialize() {
             new FunctionObject(dict_items));
 
     set_klass_dict(klass_dict);
-    (new HiTypeObject())->set_own_klass(this);
-    set_super(ObjectKlass::get_instance());
+    // __init__
+    (new HiTypeObject())->set_own_klass(this);  // as universe.cpp 
+    set_super(ObjectKlass::get_instance());  // DictKlass Inherit ObjectKlass
 
 }
 
@@ -87,7 +88,7 @@ void DictKlass::del_subscr(HiObject* x, HiObject* y) {
 
 HiDict::HiDict() {
     _map = new Map<HiObject*, HiObject*>();
-    set_klass(DictKlass::get_instance());
+    set_klass(DictKlass::get_instance());  // set Inherit  HiObject‘s  Klass* _klass = DictKlass
 }
 
 HiDict::HiDict(Map<HiObject*, HiObject*>* x) {

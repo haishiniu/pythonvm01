@@ -138,6 +138,7 @@ HiTypeObject::HiTypeObject() {
 }
 
 void HiTypeObject::set_own_klass(Klass* k) {
+    // Klass to HiObject: one to one
     _own_klass = k; 
     k->set_type_object(this);
 }

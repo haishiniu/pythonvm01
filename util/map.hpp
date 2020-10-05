@@ -5,7 +5,7 @@
 
 
 template <typename K, typename V>
-class MapEntry {
+class MapEntry {  // store mate data
 public:
     K _k;
     V _v;
