@@ -19,6 +19,9 @@
 #define HI_TRUE       Universe::HiTrue
 #define HI_FALSE      Universe::HiFalse
 
+#define ST(x) StringTable::get_instance()->STR(x)
+#define STR(x) x##_str
+
 
 Interpreter* Interpreter::_instance = NULL;
 
@@ -74,6 +77,15 @@ void Interpreter::build_frame(HiObject* callable, ObjList args) {
         HiObject* inst = ((HiTypeObject*)callable)->own_klass()->
             allocate_instance(callable, args); 
         PUSH(inst);
+    }
+    else {
+        HiObject* m = callable->getattr(ST(call));
+        if (m != Universe::HiNone)
+            build_frame(m, args);
+        else {
+            callable->print();
+            printf("\nError : can not call a normal object.\n");
+        }
     }
 }
 
@@ -364,7 +376,7 @@ void Interpreter::eval_frame() {
                     break;
 
                 case ByteCode::IN:
-                    PUSH(v->contains(w));
+                    PUSH(w->contains(v));
                     break;
 
                 case ByteCode::IS:

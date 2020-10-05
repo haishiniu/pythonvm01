@@ -17,6 +17,12 @@ public:
     HiString* init_str;
     HiString* add_str;
     HiString* len_str;
+    HiString* call_str;
+    HiString* getitem_str;
+    HiString* setitem_str;
+    HiString* getattr_str;
+    HiString* setattr_str;
+
 };
 
 #endif
