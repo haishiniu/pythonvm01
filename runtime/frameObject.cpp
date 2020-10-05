@@ -21,6 +21,8 @@ FrameObject::FrameObject(CodeObject* codes) {
     _codes = codes;
     _pc    = 0;
     _sender = NULL;
+    _entry_frame = false;
+
 }
 
 FrameObject::FrameObject (FunctionObject* func, ObjList args) {
@@ -53,6 +55,8 @@ FrameObject::FrameObject (FunctionObject* func, ObjList args) {
 
     _pc      = 0;
     _sender  = NULL;
+    _entry_frame = false;
+
 }
 
 int FrameObject::get_op_arg() {

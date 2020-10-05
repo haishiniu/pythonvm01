@@ -77,6 +77,7 @@ NativeFunctionKlass* NativeFunctionKlass::get_instance() {
 
 NativeFunctionKlass::NativeFunctionKlass() {
     set_super(FunctionKlass::get_instance());
+    set_name(new HiString("native function"));
 }
 
 HiObject* FunctionObject::call(ObjList args) {
@@ -99,6 +100,7 @@ MethodKlass* MethodKlass::get_instance() {
 MethodKlass::MethodKlass() {
     set_klass_dict(new HiDict());
     set_super(FunctionKlass::get_instance());
+    set_name(new HiString("method"));
 }
 
 /*
