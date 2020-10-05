@@ -24,6 +24,7 @@ public:
     virtual void store_subscr (HiObject* x, HiObject* y, HiObject* z);
     virtual HiObject* less     (HiObject* x, HiObject* y);
 
+    virtual HiObject* len      (HiObject* x);
     virtual HiObject* iter(HiObject* x);
     virtual HiObject* contains (HiObject* x, HiObject* y);
     virtual void del_subscr (HiObject* x, HiObject* y);

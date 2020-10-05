@@ -141,10 +141,7 @@ bool MethodObject::is_function(HiObject *x) {
 }
 
 HiObject* len(ObjList args) {
-    HiObject* arg0 = args->get(0);
-    assert(arg0->klass() == StringKlass::get_instance());
-
-    return new HiInteger(((HiString*)arg0)->length());
+    return args->get(0)->len();
 }
 
 

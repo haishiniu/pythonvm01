@@ -47,6 +47,7 @@ class HiObject {
         HiObject* contains(HiObject* x);
         void      del_subscr(HiObject* x); 
         HiObject* iter();
+        HiObject* len();
 
 };
 

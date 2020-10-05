@@ -307,3 +307,8 @@ HiObject* ListKlass::allocate_instance(HiObject* callable,
     else
         return NULL;
 }
+
+HiObject* ListKlass::len(HiObject* x) {
+    assert(x->klass() == this);
+    return new HiInteger(((HiList*)x)->size());
+}
