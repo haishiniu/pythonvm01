@@ -21,6 +21,8 @@ private:
 
     HiObject* find_and_call(HiObject* x, ObjList args, HiObject* func_name); 
 
+    HiObject* find_in_parents(HiObject* x, HiObject* y);
+
 public:
     Klass();
     static HiObject* create_klass(HiObject* x, HiObject* supers, HiObject* name);
