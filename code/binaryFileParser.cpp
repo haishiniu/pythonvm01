@@ -2,6 +2,7 @@
 #include <assert.h>
 #include "code/binaryFileParser.hpp"
 #include "runtime/universe.hpp"
+#include "object/hiList.hpp"
 
 
 
@@ -180,6 +181,11 @@ ArrayList<HiObject*>* BinaryFileParser::get_tuple() {
         case 'R': // 配合 _string_table.add(str) 使用
             list->add(_string_table.get(file_stream->read_int()));
             break;
+
+        case '(':
+            list->add(new HiList(get_tuple()));
+            break;
+
         default:
             printf("parser, unrecognized type : %c\n", obj_type);
         }

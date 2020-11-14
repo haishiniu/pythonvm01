@@ -14,6 +14,7 @@ private:
 
     // HiDict*                      _builtins;
     ModuleObject*             _builtins;
+    HiDict*                   _modules;
     FrameObject*                  _frame;
     
     HiObject*             _ret_value;
