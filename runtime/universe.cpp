@@ -5,6 +5,9 @@
 #include "object/hiObject.hpp"
 #include "object/hiString.hpp"
 #include "object/hiDict.hpp"
+#include "memory/oopClosure.hpp"
+#include "memory/heap.hpp"
+
 
 
 // __init__ 
@@ -13,13 +16,19 @@ HiObject* Universe::HiFalse  = NULL;
 HiObject*  Universe::HiNone   = NULL;
 ArrayList<Klass*>* Universe::klasses   = NULL;
 
+Heap* Universe::heap          = NULL;
+CodeObject* Universe::main_code = NULL;
+
 
 void Universe::genesis() {
+    heap = Heap::get_instance();
+    klasses = new ArrayList<Klass*>();
+
     HiTrue       = new HiString("True");
     HiFalse      = new HiString("False");
     HiNone       = new HiString("None");
     
-    klasses = new ArrayList<Klass*>();  // 可以有但是从执行效果看没有也可以不影响后续的执行
+    // klasses = new ArrayList<Klass*>();  // 可以有但是从执行效果看没有也可以不影响后续的执行
 
     Klass* object_klass = ObjectKlass::get_instance();
     Klass* type_klass   = TypeKlass::get_instance();
@@ -58,4 +67,13 @@ void Universe::genesis() {
 }
 
 void Universe::destroy() {
+}
+
+void Universe::oops_do(OopClosure* closure) {
+    closure->do_oop((HiObject**)&HiTrue);
+    closure->do_oop((HiObject**)&HiFalse);
+    closure->do_oop((HiObject**)&HiNone);
+
+    closure->do_oop((HiObject**)&main_code);
+    closure->do_array_list(&klasses);
 }

@@ -4,6 +4,7 @@
 #include "object/hiList.hpp"
 #include "runtime/universe.hpp"
 #include "runtime/functionObject.hpp"
+#include "memory/oopClosure.hpp"
 #include <assert.h>
 
 DictKlass* DictKlass::instance = NULL;
@@ -218,3 +219,15 @@ HiObject* DictKlass::allocate_instance(HiObject* callable,
     else
         return NULL;
 }
+
+
+size_t DictKlass::size() {
+    return sizeof(HiDict);
+}
+
+void DictKlass::oops_do(OopClosure* f, HiObject* obj) {
+    assert(obj->klass() == (Klass*)this);
+
+    f->do_map(&((HiDict*)obj)->_map);
+}
+

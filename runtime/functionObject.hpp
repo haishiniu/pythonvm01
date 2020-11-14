@@ -15,6 +15,9 @@ public:
     static FunctionKlass* get_instance();
 
     virtual void print(HiObject* obj);
+
+    virtual size_t size();
+    virtual void oops_do(OopClosure* f, HiObject* obj);
 };
 
 
@@ -24,6 +27,7 @@ typedef HiObject* (*NativeFuncPointer)(ObjList args);
 
 class FunctionObject : public HiObject {
 friend class FunctionKlass;  // FunctionKlass and FrameObject is FunctionObject's friend
+friend class NativeFunctionKlass;
 friend class FrameObject;
 
 private:
@@ -71,6 +75,9 @@ private:
 
 public:
     static MethodKlass* get_instance();
+    virtual size_t size();
+    virtual void oops_do(OopClosure* f, HiObject* obj);
+
 };
 
 class MethodObject : public HiObject {
@@ -104,6 +111,9 @@ private:
 
 public:
     static NativeFunctionKlass* get_instance();
+
+    virtual size_t size();
+    virtual void oops_do(OopClosure* f, HiObject* obj);
 };
 
 
@@ -111,5 +121,6 @@ HiObject* len(ObjList args);
 HiObject* type_of(ObjList args);
 HiObject* isinstance(ObjList args);
 HiObject* builtin_super(ObjList args);
+HiObject* sysgc(ObjList args);
 
 #endif

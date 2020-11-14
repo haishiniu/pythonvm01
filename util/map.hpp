@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 
+class OopClosure;
 
 template <typename K, typename V>
 class MapEntry {  // store mate data
@@ -13,6 +14,8 @@ public:
     MapEntry(const MapEntry<K, V>& entry);
     MapEntry(K k, V v) : _k(k), _v(v) {}  // 是什么语法？
     MapEntry() : _k(0), _v(0) {}
+
+    void* operator new[](size_t size);
 };
 
 
@@ -36,6 +39,10 @@ public:
     V    remove(K k);
     int  index(K k);
     MapEntry<K, V>* entries() { return _entries; }
+
+    void* operator new(size_t size);
+    void oops_do(OopClosure* closure);
+    
 };
 
 

@@ -72,6 +72,16 @@ public:
 
     virtual HiObject* getattr  (HiObject* x, HiObject* y);
     virtual HiObject* setattr  (HiObject* x, HiObject* y, HiObject* z);
+
+    
+    // gc interfaces
+    // this is for objects of this type.
+    virtual void oops_do(OopClosure* closure, HiObject* obj);
+    // for klass itself only.
+    virtual void oops_do(OopClosure* closure);
+    virtual size_t size();
+
+    void* operator new(size_t size);
 };
 
 #endif

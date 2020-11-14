@@ -20,11 +20,14 @@ ADD_EXECUTABLE(pyvm01 main.cpp
     object/hiDict.cpp
     util/arrayList.cpp
     util/map.cpp
+    util/handles.cpp
     runtime/frameObject.cpp
     runtime/interpreter.cpp
     runtime/universe.cpp
     runtime/functionObject.cpp
     runtime/stringTable.cpp
+    memory/heap.cpp
+    memory/oopClosure.cpp
     code/binaryFileParser.cpp
     code/codeObject.cpp)
 

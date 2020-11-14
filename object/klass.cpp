@@ -8,6 +8,8 @@
 #include "runtime/stringTable.hpp"
 #include "runtime/interpreter.hpp"
 #include "runtime/functionObject.hpp"
+#include "memory/heap.hpp"
+#include "memory/oopClosure.hpp"
 
 
 #define ST(x) StringTable::get_instance()->STR(x)
@@ -212,6 +214,9 @@ HiTypeObject* Klass::super() {
 }
 
 Klass::Klass() {
+    Universe::klasses->add(this);
+    _klass_dict = NULL;
+    _name = NULL;
     _super = NULL;
     _mro   = NULL;
 }
@@ -281,4 +286,27 @@ HiObject* Klass::find_in_parents(HiObject* x, HiObject* y) {
 
     return result;
 
+}
+
+void* Klass::operator new(size_t size) {
+    return Universe::heap->allocate_meta(size);
+}
+
+// this function will visit all children
+void Klass::oops_do(OopClosure* closure, HiObject* obj) {
+    printf("warning: klass oops_do for ");
+    _name->print();
+    printf("\n");
+}
+
+void Klass::oops_do(OopClosure* f) {
+    f->do_oop((HiObject**)&_super);
+    f->do_oop((HiObject**)&_mro);
+    f->do_oop((HiObject**)&_name);
+    f->do_oop((HiObject**)&_klass_dict);
+    f->do_oop((HiObject**)&_type_object);
+}
+
+size_t Klass::size() {
+    return sizeof(HiObject);
 }

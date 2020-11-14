@@ -49,7 +49,8 @@ public:
 
     HiDict* _locals;
     HiDict* _globals;
-    ObjList                    _fast_locals;
+    // ObjList                    _fast_locals;
+    HiList*               _fast_locals;
 
     CodeObject*           _codes;
     FrameObject*          _sender;  // 记录调用者的栈帧--链表存储
@@ -73,11 +74,14 @@ public:
     ArrayList<HiObject*>* names()                 { return _names; }
     HiDict* locals()                              { return _locals; }
     HiDict* globals()                             { return _globals; }
-    ObjList fast_locals()                         { return _fast_locals; }
+    // ObjList fast_locals()                         { return _fast_locals; }
+    HiList* fast_locals()           { return _fast_locals; }
 
     bool has_more_codes();
     unsigned char get_op_code();
     int  get_op_arg();
+
+    void oops_do(OopClosure* f);
 };
 
 #endif

@@ -17,6 +17,7 @@ public:
 
 class HiObject {
     private:
+        long    _mark_word;
         Klass* _klass;
         HiDict* _obj_dict;
     public:
@@ -52,6 +53,14 @@ class HiObject {
         HiDict* obj_dict()   { return _obj_dict; }
         void init_dict();
 
+        void* operator new(size_t size);
+
+        // interfaces for GC.
+        void oops_do(OopClosure* closure);
+        size_t size();
+        char* new_address();
+        void set_new_address(char* addr);
+
 };
 
 /*
@@ -67,6 +76,10 @@ public:
 
     virtual void print(HiObject* obj);
     virtual HiObject* setattr(HiObject* x, HiObject* y, HiObject* z);
+
+    virtual size_t size();
+    virtual void oops_do(OopClosure* f, HiObject* obj);
+
 };
 
 class HiTypeObject : public HiObject {

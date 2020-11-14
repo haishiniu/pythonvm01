@@ -1,9 +1,12 @@
 #include "object/hiString.hpp"
 #include "object/hiList.hpp"
 #include "object/hiInteger.hpp"
+#include "object/hiDict.hpp"
 #include "runtime/universe.hpp"
 #include "runtime/functionObject.hpp"
-#include "object/hiDict.hpp"
+// #include "object/hiDict.hpp"
+#include "memory/heap.hpp"
+#include "memory/oopClosure.hpp"
 
 
 // Singleton case
@@ -53,6 +56,21 @@ void FunctionKlass::print(HiObject* obj) {
     fo->func_name()->print();
     printf(">");
 }
+
+size_t FunctionKlass::size() {
+    return sizeof(FunctionObject);
+}
+
+void FunctionKlass::oops_do(OopClosure* f, HiObject* obj) {
+    FunctionObject* fo = (FunctionObject*)obj;
+    assert(fo->klass() == (Klass*)this);
+
+    f->do_oop((HiObject**)&fo->_func_code);
+    f->do_oop((HiObject**)&fo->_func_name);
+    f->do_oop((HiObject**)&fo->_globals);
+    f->do_array_list(&fo->_defaults);
+}
+
 
 void FunctionObject::set_default(ArrayList<HiObject*>* defaults) {
     if (defaults == NULL) {
@@ -114,6 +132,19 @@ MethodKlass::MethodKlass() {
 
 }
 
+size_t MethodKlass::size() {
+    return sizeof(MethodObject);
+}
+
+void MethodKlass::oops_do(OopClosure* f, HiObject* obj) {
+    MethodObject* mo = (MethodObject*)obj;
+    assert(mo->klass() == (Klass*)this);
+
+    f->do_oop((HiObject**)&mo->_owner);
+    f->do_oop((HiObject**)&mo->_func);
+}
+
+
 HiObject* len(ObjList args) {
     return args->get(0)->len();
 }
@@ -170,6 +201,11 @@ HiObject* builtin_super(ObjList args) {
     return NULL;
 }
 
+HiObject* sysgc(ObjList args) {
+    Universe::heap->gc();
+    return Universe::HiNone;
+}
+
 bool MethodObject::is_function(HiObject *x) {
     Klass* k = x->klass();
     if (k == (Klass*) FunctionKlass::get_instance())
@@ -187,3 +223,18 @@ bool MethodObject::is_function(HiObject *x) {
 
     return false;
 }
+
+size_t NativeFunctionKlass::size() {
+    return sizeof(FunctionObject);
+}
+
+void NativeFunctionKlass::oops_do(OopClosure* f, HiObject* obj) {
+    FunctionObject* fo = (FunctionObject*)obj;
+    assert(fo->klass() == (Klass*)this);
+
+    f->do_oop((HiObject**)&fo->_func_code);
+    f->do_oop((HiObject**)&fo->_func_name);
+    f->do_oop((HiObject**)&fo->_globals);
+    f->do_array_list(&fo->_defaults);
+}
+
