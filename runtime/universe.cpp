@@ -5,6 +5,8 @@
 #include "object/hiObject.hpp"
 #include "object/hiString.hpp"
 #include "object/hiDict.hpp"
+#include "runtime/module.hpp"
+#include "runtime/interpreter.hpp"
 #include "memory/oopClosure.hpp"
 #include "memory/heap.hpp"
 
@@ -47,6 +49,8 @@ void Universe::genesis() {
     StringKlass::get_instance()->initialize();
     DictKlass::get_instance()->initialize();
     ListKlass::get_instance()->initialize();
+    ModuleKlass::get_instance()->initialize();
+
 
     type_klass->set_klass_dict(new HiDict());
     object_klass->set_klass_dict(new HiDict());
@@ -63,6 +67,10 @@ void Universe::genesis() {
     FunctionKlass::get_instance()->order_supers();
     NativeFunctionKlass::get_instance()->order_supers();
     MethodKlass::get_instance()->order_supers();
+
+    ModuleKlass::get_instance()->order_supers();
+
+    Interpreter::get_instance()->initialize();
 
 }
 

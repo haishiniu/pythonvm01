@@ -93,6 +93,12 @@ void ArrayList<T>::delete_index(int index) {
     _size--;
 }
 
+template <typename T>
+void ArrayList<T>::oops_do(OopClosure* closure) {
+    closure->do_raw_mem((char**)(&_array), 
+            _length * sizeof(T));
+}
+
 
 template <typename T>
 void* ArrayList<T>::operator new(size_t size) {
@@ -132,3 +138,5 @@ template class ArrayList<Block*>;
 
 class Klass;
 template class ArrayList<Klass*>;
+
+// template class ArrayList<char>;
