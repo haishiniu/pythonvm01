@@ -19,22 +19,22 @@ void Universe::genesis() {
     HiFalse      = new HiString("False");
     HiNone       = new HiString("None");
     
-    klasses = new ArrayList<Klass*>();
+    klasses = new ArrayList<Klass*>();  // 可以有但是从执行效果看没有也可以不影响后续的执行
 
     Klass* object_klass = ObjectKlass::get_instance();
     Klass* type_klass   = TypeKlass::get_instance();
 
     HiTypeObject* tp_obj = new HiTypeObject();
-    tp_obj->set_own_klass(type_klass);
+    tp_obj->set_own_klass(type_klass);  // tp_obj对象的 _own_klass 与 _klass 是同一个 type_klass; self create self
 
     HiTypeObject* obj_obj = new HiTypeObject();
-    obj_obj->set_own_klass(object_klass);
+    obj_obj->set_own_klass(object_klass);  // obj_obj 对象的 _own_klass 是 object_klass; _klass 是 type_klass; type_klass create object_klass
 
-    type_klass->add_super(object_klass);
+    type_klass->add_super(object_klass);  // type_klass 的父类 是 object_klass
     // do nothing for object klass
     //object_klass->add_super(NULL);
 
-    IntegerKlass::get_instance()->initialize();
+    IntegerKlass::get_instance()->initialize(); // 继承 object_klass
     StringKlass::get_instance()->initialize();
     DictKlass::get_instance()->initialize();
     ListKlass::get_instance()->initialize();

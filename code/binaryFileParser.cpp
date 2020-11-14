@@ -19,6 +19,7 @@ CodeObject* BinaryFileParser::parse() {
 
     char object_type = file_stream->read();
     printf("object_type %x\n", object_type);
+    printf("object_type %s\n", "c");
     if (object_type == 'c') {
         CodeObject* result = get_code_object();
         printf("parse OK!\n");
@@ -59,7 +60,6 @@ HiString* BinaryFileParser::get_string() {
     for (int i = 0; i < length; i++) {
         str_value[i] = file_stream->read();  // 读取指定字节长度的数据
     }
-
     HiString* s = new HiString(str_value, length);
     delete[] str_value;
 

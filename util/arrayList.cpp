@@ -14,12 +14,12 @@ void ArrayList<T>::add(T t) {
     if (_size >= _length)
         expand();
 
-    _array[_size++] = t;
+    _array[_size++] = t;  // first use then add ++
 }
 
 template <typename T>
 void ArrayList<T>::insert(int index, T t) {
-    add(NULL);
+    add(NULL);  // hold a position
 
     for (int i = _size - 1; i > index; i --) {
         _array[i] = _array[i - 1];

@@ -259,7 +259,7 @@ HiObject* list_reverse(ObjList args) {
     int i = 0;
     int j = list->size() - 1;
     while (i < j) {
-        HiObject* t = list->get(i);
+        HiObject* t = list->get(i);  // i, j, t reverse
         list->set(i, list->get(j));
         list->set(j, t);
 

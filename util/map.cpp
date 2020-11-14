@@ -4,7 +4,7 @@
 
 template <typename K, typename V>
 Map<K, V>::Map() {
-    _entries = new MapEntry<K, V>[8];
+    _entries = new MapEntry<K, V>[8];  // a new array
     _length  = 8;
     _size    = 0;
 }
